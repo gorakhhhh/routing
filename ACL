@@ -1,0 +1,92 @@
+Access Control List mini project (ACL):- is a set of rules used to control network traffic and enforce security policies on routers, switches, and other network devices. ACLs are used to permit or deny traffic based on various criteria such as IP addresses, protocols, ports, and more. They play a critical role in network security and traffic management.
+
+-Types of ACL:-
+•Standard ACL: Filters traffic based on the source IP address only, allowing simple access control. Commonly used for basic source-based filtering.
+
+•Extended ACL: Provides detailed control by filtering based on source and destination IP addresses, protocols, and port numbers. Useful for complex traffic management and security policies.
+
+-Router A: Connected to Network A (192.168.10.0)
+-Router B: Connected to Network B (192.168.20.0)
+-Router C: Connected to Network C (192.168.30.0)
+
+-The routers are connected as follows:
+
+•Router A is directly connected to Router B with IP addresses 10.0.0.1 and 10.0.0.2.
+•Router B is directly connected to Router C with IP addresses 20.0.0.1 and 20.0.0.2.
+
+-Mini project:- where in router A we block the whole network and in router C we block only 1 host.
+
+-ACL Configurations:
+
+Router A: Implements an ACL that blocks all network traffic. This means that any data packets passing through Router A will be denied, effectively isolating Router A from all other network communications.
+
+Router C: Implements an ACL that blocks traffic to or from a single specific host. This configuration only affects traffic related to that one host and does not impact other network traffic passing through Router C.
+
+Configuration Steps
+For router A:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.10.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router OSPF 1
+hashtag#network 192.168.10.0 0.0.0.255 area 0
+hashtag#network 10.0.0.0. 0.255.255.255. area 0
+hashtag#ex
+hashtag#ip access-list standard 1
+hashtag#deny 182.168.10.0 0.0.0.255
+hashtag#permit any
+hashtag#ex
+hashtag#int gig0/0/0
+hashtag#ip access-group 1 in
+
+For router B:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.20.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.2 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/1
+hashtag#ip add 20.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router OSPF 1
+hashtag#network 192.168.20.0 0.0.0.255 area 0
+hashtag#network 10.0.0.0. 0.255.255.255. area 0
+hashtag#network 20.0.0.0. 0.255.255.255. area 0
+hashtag#ex
+
+For router C:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.30.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 20.0.0.2. 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router OSPF 1
+hashtag#network 192.168.30.0 0.0.0.255 area 0
+hashtag#network 20.0.0.0. 0.255.255.255. area 0
+hashtag#ex
+hashtag#ip access-list standard 1
+hashtag#deny host 182.168.30.0 
+hashtag#permit any
+hashtag#ex
+hashtag#int gig0/0/0
+hashtag#ip access-group 1 in
+
+-give ip and gateway to all pc and try to ping.
+- and this way you block the whole network and specific host using ACL.
