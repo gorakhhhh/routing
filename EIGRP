@@ -1,0 +1,74 @@
+-It seems like you might be referring to RIPng or EIGRP (Enhanced Interior Gateway Routing Protocol), as "RIGRP" is not a standard routing protocol. I'll explain EIGRP with a three-router example since it’s a popular dynamic routing protocol.
+
+-EIGRP (Enhanced Interior Gateway Routing Protocol) is a dynamic routing protocol that uses a distance-vector algorithm and supports both IPv4 and IPv6. It combines the best features of link-state and distance-vector protocols, using metrics such as bandwidth, delay, load, and reliability to determine the best path to a destination.
+
+-Certainly! Let's consider a network setup involving three routers (Router A, Router B, and Router C) with the following connections:
+
+•Router A is connected to Router B.
+•Router B is connected to both Router A and C. 
+•Router C is connected to Router B.
+
+
+-Scenario
+Router A: Connected to Network A (192.168.10.0)
+Router B: Connected to Network B (192.168.20.0)
+Router C: Connected to Network C (192.168.30.0)
+
+-The routers are connected as follows:
+
+•Router A is directly connected to Router B with IP addresses 10.0.0.1 and 10.0.0.2.
+•Router B is directly connected to Router C with IP addresses 20.0.0.1 and 20.0.0.2.
+
+-Configuration Steps
+For router A:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.10.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router EIGRP 10
+hashtag#network 192.168.10.0
+hashtag#network 10.0.0.0
+hashtag#ex
+
+For router B:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.20.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.2 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/1
+hashtag#ip add 20.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router EIGRP 10
+hashtag#network 192.168.20.0
+hashtag#network 10.0.0.0
+hashtag#network 20.0.0.0
+hashtag#ex
+
+For router C:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.30.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 20.0.0.2. 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router EIGRP 10
+hashtag#network 192.168.30.0
+hashtag#network 20.0.0.0
+hashtag#ex
