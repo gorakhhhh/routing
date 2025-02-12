@@ -1,0 +1,67 @@
+Static routing:- involves manually specifying routes in a network configuration. In the context of IP routing, this means defining fixed paths that data packets should take to reach a destination. Here's a simple example using the ip route command, which is commonly used in network devices like routers.
+
+-Certainly! Let's consider a network with three routers and three different networks. Here's how you would configure static routing among them.
+
+-Scenario
+Router A: Connected to Network A (192.168.10.0)
+Router B: Connected to Network B (192.168.20.0)
+Router C: Connected to Network C (192.168.30.0)
+
+-The routers are connected as follows:
+
+Router A is directly connected to Router B with IP addresses 10.0.0.1 and 10.0.0.2
+Router B is directly connected to Router C with IP addresses 20.0.0.1 and 20.0.0.2
+
+-Configuration Steps
+For router A:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.10.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#ip route 192.168.20.0 255.255.255.0 10.0.0.2
+hashtag#ip route 192.168.30.0 255.255.255.0 10.0.0.2
+hashtag#ip route 20.0.0.0 255.0.0.0 10.0.0.2
+
+-In above command we first configure the network and serial IP and then do the IP route where routes knows all the routes and best path to reach to the source to destination.
+-In IP route we give the destination's network IP and gateway IP to reach there.
+
+For router B:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.20.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.2 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/1
+hashtag#ip add 20.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#ip route 192.168.10.0 255.255.255.0 10.0.0.1
+hashtag#ip route 192.168.30.0 255.255.255.0 20.0.0.2
+
+For router C:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.30.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 20.0.0.2 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#ip route 192.168.20.0 255.255.255.0 20.0.0.1
+hashtag#ip route 192.168.10.0 255.255.255.0 20.0.0.1
+hashtag#ip route 10.0.0.0 255.0.0.0 20.0.0.1
+
+after that five IP address and gateway address to all pc same as in the diagram and ping the PC's.
