@@ -1,0 +1,68 @@
+OSPF (Open Shortest Path First) is a link-state routing protocol used within an autonomous system (AS) to dynamically distribute routing information among routers. It's designed to find the best path for packets to travel across a network.Overall, OSPF is widely used in large enterprise networks and service providers due to its robustness, scalability, and efficient handling of routing information.
+
+-Certainly! Here's a basic example of configuring OSPF (Open Shortest Path First) on a network with three routers. Let’s call them Router A, Router B, and Router C. We'll assume that the routers are interconnected and have the following IP addresses on their respective interfaces:
+
+-Router A: Connected to Network A (192.168.10.0)
+Router B: Connected to Network B (192.168.20.0)
+Router C: Connected to Network C (192.168.30.0)
+
+-The routers are connected as follows:
+
+•Router A is directly connected to Router B with IP addresses 10.0.0.1 and 10.0.0.2.
+•Router B is directly connected to Router C with IP addresses 20.0.0.1 and 20.0.0.2.
+
+-Configuration Steps
+For router A:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.10.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router OSPF 1
+hashtag#network 192.168.10.0 0.0.0.255 area 0
+hashtag#network 10.0.0.0. 0.255.255.255. area 0
+hashtag#ex
+
+For router B:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.20.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 10.0.0.2 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/1
+hashtag#ip add 20.0.0.1 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router OSPF 1
+hashtag#network 192.168.20.0 0.0.0.255 area 0
+hashtag#network 10.0.0.0. 0.255.255.255. area 0
+hashtag#network 20.0.0.0. 0.255.255.255. area 0
+hashtag#ex
+
+For router C:-
+>en
+hashtag#conf t
+hashtag#int gig0/0/0
+hashtag#ip add 192.168.30.1 255.255.255.0 
+hashtag#no shut
+hashtag#ex
+hashtag#int se 0/1/0
+hashtag#ip add 20.0.0.2. 255.0.0.0
+hashtag#no shut
+hashtag#ex
+hashtag#router OSPF 1
+hashtag#network 192.168.30.0 0.0.0.255 area 0
+hashtag#network 20.0.0.0. 0.255.255.255. area 0
+hashtag#ex
+
+- then give ip address and mac address to all PC's.
