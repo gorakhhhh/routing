@@ -1,0 +1,17 @@
+Dynamic routing:- is a technique used in networking to automatically adjust the paths that data packets take through a network. Unlike static routing, where paths are manually configured and do not change unless manually adjusted, dynamic routing allows routers to discover and adapt to network changes in real-time.
+
+There are several types of dynamic routing protocols, which can be categorized into:
+
+1)Distance-Vector Protocols: These protocols determine the best path to a destination based on distance and direction. They periodically send out updates to their neighbors about the network topology. Examples include:
+
+•Routing Information Protocol (RIP): Uses hop count as its metric and is simple but has limitations in larger networks.
+
+•Interior Gateway Routing Protocol (IGRP): Developed by Cisco, it uses a composite metric including bandwidth, delay, load, and reliability.
+
+2)Link-State Protocols: These protocols have a more detailed view of the network topology and share information about the state of their own links. They compute the shortest path to each destination using algorithms like Dijkstra's. Examples include:
+•Open Shortest Path First (OSPF): A widely used protocol that scales well and supports large networks.
+
+•Intermediate System to Intermediate System (IS-IS): Similar to OSPF but designed for larger and more complex networks.
+
+3)Path-Vector Protocols: Used primarily in inter-domain or inter-AS (Autonomous System) routing, these protocols maintain the path information that gets updated as routes are learned. An example is:
+•Border Gateway Protocol (BGP): The protocol used to make core routing decisions on the internet, managing how data is routed between different autonomous systems.
